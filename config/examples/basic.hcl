@@ -10,17 +10,23 @@ environments {
 
 stacks {
   stack "virtual_machines" {
-    tags = []
+    tags = ["compute"]
   }
   stack "virtual_networks" {
-    tags = []
+    tags = ["connectivity"]
     stack "network_security_groups" {
-      tags = []
+      tags = ["connectivity", "security"]
     }
   }
   stack "firewall" {
-    tags = []
+    tags = ["connectivity", "security"]
     exclude_regions = ["uksouth"]
     exclude_environments = ["testing", "development"]
+  }
+  stack "automation" {
+    tags = []
+    stack "docker" {
+      tags = []
+    }
   }
 }

@@ -12,6 +12,7 @@ func GenerateStacks(Stacks types.Stacks, RegionStacks types.DecodedStacks) types
 
 			DecodedStack.Path = region.Path + "/" + stack.Name
 			DecodedStack.Tags = append(DecodedStack.Tags, stack.Tags...)
+			DecodedStack.Tags = append(DecodedStack.Tags, region.Tags...)
 
 			DecodedStacks.DecodedStack = append(DecodedStacks.DecodedStack, DecodedStack)
 
@@ -22,6 +23,7 @@ func GenerateStacks(Stacks types.Stacks, RegionStacks types.DecodedStacks) types
 
 					ChildDecodedStack.Path = DecodedStack.Path + "/" + childStack.Name
 					ChildDecodedStack.Tags = append(ChildDecodedStack.Tags, childStack.Tags...)
+					ChildDecodedStack.Tags = append(ChildDecodedStack.Tags, region.Tags...)
 
 					DecodedStacks.DecodedStack = append(DecodedStacks.DecodedStack, ChildDecodedStack)
 
