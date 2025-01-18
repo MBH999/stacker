@@ -1,21 +1,21 @@
 package createstack
 
 import (
-	"fmt"
 	"os/exec"
 
 	"github.com/charmbracelet/log"
+	"github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
-func CreateStacks(stackPaths []string) {
-	for _, path := range stackPaths {
-		fmt.Println(path)
-		command := "terramate create " + path
-		cmd := exec.Command("sh", "-c", command)
+func CreateStack(Stack types.DecodedStack) int {
+	command := "terramate create " + Stack.Path
+	cmd := exec.Command("sh", "-c", command)
 
-		_, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Errorf("error: %v", err)
-		}
+	_, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Errorf("error: %v", err.Error())
 	}
+
+	log.Infof("Created stack: %v", Stack.Path)
+	return 0
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/hashicorp/hcl/v2/gohcl"
 	"github.com/hashicorp/hcl/v2/hclparse"
 
-	generatepath "github.com/tmtf-stacker/stacker/internal/pkg/generate_path"
+	generatestacks "github.com/tmtf-stacker/stacker/internal/pkg/generate_stacks"
 	types "github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
@@ -25,7 +25,7 @@ func StackDecode() {
 		log.Fatalf("Error decoding HCL: %v", decodeDiags)
 	}
 
-	generatepath.Init(config)
+	generatestacks.Init(config)
 
 	// for _, region := range config.Regions.Config {
 	// 	fmt.Printf("Regions: %s\n", region)
