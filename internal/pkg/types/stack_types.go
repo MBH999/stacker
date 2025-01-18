@@ -1,7 +1,9 @@
 package types
 
 type Config struct {
-	Stacks Stacks `hcl:"stacks,block"`
+	Regions      Regions      `hcl:"regions,block"`
+	Environments Environments `hcl:"environments,block"`
+	Stacks       Stacks       `hcl:"stacks,block"`
 }
 
 type Stacks struct {
@@ -13,5 +15,15 @@ type Stack struct {
 	Tags                []string `hcl:"tags"`
 	ExcludeRegions      []string `hcl:"exclude_regions,optional"`
 	ExcludeEnvironments []string `hcl:"exclude_environments,optional"`
-	Stack               []Stack  `hcl:"stack,block"`
+	ChildStack          []Stack  `hcl:"stack,block"`
+}
+
+type Regions struct {
+	Config             []string `hcl:"config"`
+	CreateRegionStacks bool     `hcl:"create_region_stacks"`
+}
+
+type Environments struct {
+	Config                  []string `hcl:"config"`
+	CreateEnvironmentStacks bool     `hcl:"create_environment_stacks"`
 }
