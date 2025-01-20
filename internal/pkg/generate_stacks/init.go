@@ -2,6 +2,7 @@ package generatestacks
 
 import (
 	"github.com/charmbracelet/log"
+	checkstacks "github.com/tmtf-stacker/stacker/internal/pkg/check_stacks"
 	createstack "github.com/tmtf-stacker/stacker/internal/pkg/create_stack"
 	types "github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
@@ -23,17 +24,16 @@ func Init(Config types.Config) {
 
 	StackConfig.DecodedStack = append(StackConfig.DecodedStack, Stacks.DecodedStack...)
 
-	var success int
-	var failure int
-
 	for _, Stack := range StackConfig.DecodedStack {
-		err := createstack.CreateStack(Stack)
-		if err != nil {
-			failure += 1
+		stackExists := checkstacks.CheckStacks(Stack.Path)
+
+		if stackExists {
+			log.Warnf("Stack %s exists!", Stack.Path)
 		} else {
-			success += 1
+			err := createstack.CreateStack(Stack)
+			if err != nil {
+				log.Errorf("unable to create stack %s", Stack.Path)
+			}
 		}
 	}
-	log.Infof("Created %d", success)
-	log.Infof("Failure %d", failure)
 }
