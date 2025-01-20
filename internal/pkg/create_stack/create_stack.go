@@ -8,7 +8,7 @@ import (
 	"github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
-func CreateStack(Stack types.DecodedStack) int {
+func CreateStack(Stack types.DecodedStack) error {
 	tags := strings.Join(Stack.Tags, ",")
 
 	command := "terramate create --tags " + tags + " " + Stack.Path
@@ -18,8 +18,9 @@ func CreateStack(Stack types.DecodedStack) int {
 	_, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Errorf("error: %v", err.Error())
+		return err
 	}
 
 	log.Infof("Created stack: %v", Stack.Path)
-	return 0
+	return err
 }
