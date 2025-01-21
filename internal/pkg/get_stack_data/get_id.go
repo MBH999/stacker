@@ -1,6 +1,9 @@
 package getstackdata
 
-import "os/exec"
+import (
+	"os/exec"
+	"strings"
+)
 
 func GetStackID(path string) string {
 	command := "terramate experimental get-config-value -C " + path + " 'terramate.stack.id'"
@@ -9,5 +12,7 @@ func GetStackID(path string) string {
 	// run the command
 	output, _ := cmd.CombinedOutput()
 
-	return string(output)
+	cleanedOutput := strings.TrimSpace(string(output))
+
+	return cleanedOutput
 }

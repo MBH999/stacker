@@ -1,33 +1,18 @@
 regions {
-  config = ["uksouth", "ukwest"]
+  config = ["uksouth","ukwest"]
   create_region_stacks = false
 }
 
 environments {
-  config = ["production", "testing", "development"]
+  config = ["development"]
   create_environment_stacks = true
 }
 
 stacks {
-  stack "virtual_machines" {
-    tags = ["compute"]
-    description = "An example description"
-  }
   stack "virtual_networks" {
-    tags = ["connectivity"]
+    tags = ["connectivity", "test3"]
     stack "network_security_groups" {
-      tags = ["connectivity", "security"]
-    }
-  }
-  stack "firewall" {
-    tags = ["connectivity", "security"]
-    exclude_regions = ["uksouth"]
-    exclude_environments = ["testing", "development"]
-  }
-  stack "automation" {
-    tags = []
-    stack "docker" {
-      tags = ["docker"]
+      tags = ["connectivity", "test1"]
     }
   }
 }
