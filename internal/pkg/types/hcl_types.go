@@ -13,6 +13,7 @@ type Stacks struct {
 type Stack struct {
 	Name                string   `hcl:"name,label"`
 	Tags                []string `hcl:"tags"`
+	Description         string   `hcl:"description,optional"`
 	ExcludeRegions      []string `hcl:"exclude_regions,optional"`
 	ExcludeEnvironments []string `hcl:"exclude_environments,optional"`
 	ChildStack          []Stack  `hcl:"stack,block"`

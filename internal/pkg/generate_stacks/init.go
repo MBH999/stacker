@@ -29,6 +29,7 @@ func Init(Config types.Config) {
 
 		if stackExists {
 			log.Warnf("Stack %s exists!", Stack.Path)
+			checkstacks.CheckTags(Stack)
 		} else {
 			err := createstack.CreateStack(Stack)
 			if err != nil {

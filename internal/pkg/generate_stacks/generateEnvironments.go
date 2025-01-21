@@ -11,7 +11,7 @@ func GenerateEnvironments(Environment types.Environments) types.DecodedStacks {
 		var Stack types.DecodedStack
 		Stack.Path = "./stacks/" + environment
 		Stack.Tags = append(Stack.Tags, environment)
-
+		Stack.Description = environment
 		Stacks.DecodedStack = append(Stacks.DecodedStack, Stack)
 	}
 	return Stacks

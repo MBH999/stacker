@@ -5,6 +5,7 @@ type DecodedStacks struct {
 }
 
 type DecodedStack struct {
-	Path string
-	Tags []string
+	Path        string
+	Tags        []string
+	Description string
 }

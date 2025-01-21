@@ -11,6 +11,7 @@ func GenerateRegions(Regions types.Regions, EnvironmentStacks types.DecodedStack
 			Stack.Path = environment.Path + "/" + region
 			Stack.Tags = append(Stack.Tags, region)
 			Stack.Tags = append(Stack.Tags, environment.Tags...)
+			Stack.Description = region
 			Stacks.DecodedStack = append(Stacks.DecodedStack, Stack)
 		}
 	}

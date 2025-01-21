@@ -11,8 +11,7 @@ import (
 func CreateStack(Stack types.DecodedStack) error {
 	tags := strings.Join(Stack.Tags, ",")
 
-	command := "terramate create --tags " + tags + " " + Stack.Path
-	// fmt.Println(Stack.Tags)
+	command := "terramate create --tags " + tags + " " + "--description \"" + Stack.Description + "\" " + Stack.Path
 	cmd := exec.Command("sh", "-c", command)
 
 	_, err := cmd.CombinedOutput()

@@ -11,6 +11,7 @@ environments {
 stacks {
   stack "virtual_machines" {
     tags = ["compute"]
+    description = "An example description"
   }
   stack "virtual_networks" {
     tags = ["connectivity"]
