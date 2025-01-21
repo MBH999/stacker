@@ -4,24 +4,41 @@ import (
 	"encoding/json"
 	"fmt"
 	"os/exec"
+	"slices"
+	"strings"
 
+	"github.com/tmtf-stacker/stacker/internal/pkg/helper"
 	"github.com/tmtf-stacker/stacker/internal/pkg/types"
+	updatestacks "github.com/tmtf-stacker/stacker/internal/pkg/update_stacks"
 )
 
 func CheckTags(Stack types.DecodedStack) {
-	// tags := strings.Join(Stack.Tags, ",")
+	// take stack tags and convert to string.
 	tags, _ := json.Marshal(Stack.Tags)
+	tagsStr := string(tags)
 
+	// create terramate command to grab stack tags
 	command := "terramate experimental get-config-value -C " + Stack.Path + " 'terramate.stack.tags'"
 	cmd := exec.Command("sh", "-c", command)
 
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-	}
-	// fmt.Println(string(output))
-	// fmt.Println(string(tags))
+	// run the command
+	output, _ := cmd.CombinedOutput()
 
-	if string(output) == string(tags) {
-		fmt.Println("true")
+	// convert output to string
+	outputStr := string(output)
+
+	sanitizeOutput := helper.RemoveChars(outputStr, "[] \n")
+	sanitizeTags := helper.RemoveChars(tagsStr, "[] \n")
+
+	outputArr := strings.Split(sanitizeOutput, ",")
+	slices.Sort(outputArr)
+	tagsArr := strings.Split(sanitizeTags, ",")
+	slices.Sort(tagsArr)
+
+	if !slices.Equal(outputArr, tagsArr) {
+		updatestacks.UpdateTags(Stack.Path, tagsStr)
+		fmt.Println("Dont Match!")
+	} else {
+		fmt.Println("Tags Match!")
 	}
 }

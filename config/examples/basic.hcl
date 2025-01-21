@@ -27,7 +27,7 @@ stacks {
   stack "automation" {
     tags = []
     stack "docker" {
-      tags = []
+      tags = ["docker"]
     }
   }
 }
