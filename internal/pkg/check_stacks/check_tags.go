@@ -37,7 +37,7 @@ func CheckTags(Stack types.DecodedStack) {
 
 	if !slices.Equal(outputArr, tagsArr) {
 		updatestacks.UpdateTags(Stack.Path, tagsStr)
-		fmt.Println("Dont Match!")
+		fmt.Println("Updating Tags!")
 	} else {
 		fmt.Println("Tags Match!")
 	}
