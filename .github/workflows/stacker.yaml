@@ -46,5 +46,5 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: go-build
+          name: stacker
           path: ./stacker.bin
