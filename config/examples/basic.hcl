@@ -13,6 +13,7 @@ stacks {
     tags = ["connectivity", "test3"]
     stack "network_security_groups" {
       tags = ["connectivity", "test1"]
+      description = "Example description for NSGs"
     }
   }
 }

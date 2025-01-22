@@ -1,6 +1,8 @@
 package generatestacks
 
 import (
+	"fmt"
+
 	"github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
@@ -18,6 +20,7 @@ func GenerateStacks(Stacks types.Stacks, RegionStacks types.DecodedStacks) types
 
 			if stack.Description != "" {
 				DecodedStack.Description = stack.Description
+				fmt.Println(DecodedStack.Description)
 			} else {
 				DecodedStack.Description = stack.Name
 			}
@@ -33,8 +36,9 @@ func GenerateStacks(Stacks types.Stacks, RegionStacks types.DecodedStacks) types
 					ChildDecodedStack.Tags = append(ChildDecodedStack.Tags, childStack.Tags...)
 					ChildDecodedStack.Tags = append(ChildDecodedStack.Tags, region.Tags...)
 
-					if stack.Description != "" {
+					if childStack.Description != "" {
 						ChildDecodedStack.Description = childStack.Description
+						fmt.Println(childStack.Description)
 					} else {
 						ChildDecodedStack.Description = childStack.Name
 					}
