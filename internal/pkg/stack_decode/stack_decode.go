@@ -10,8 +10,8 @@ import (
 	types "github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
-func StackDecode() {
-	filename := "./config/examples/basic.hcl"
+func StackDecode(configPath string) {
+	filename := configPath
 
 	parser := hclparse.NewParser()
 	file, diags := parser.ParseHCLFile(filename)

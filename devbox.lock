@@ -96,6 +96,54 @@
           "store_path": "/nix/store/jfv85qbj4vb1dafcg6kncg4vrbq2bbxv-go-1.23.4"
         }
       }
+    },
+    "terramate@latest": {
+      "last_modified": "2025-01-25T23:17:58Z",
+      "resolved": "github:NixOS/nixpkgs/b582bb5b0d7af253b05d58314b85ab8ec46b8d19#terramate",
+      "source": "devbox-search",
+      "version": "0.11.6",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/i51lhryq3ds3x39by1rhah1jq4y1r08i-terramate-0.11.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/i51lhryq3ds3x39by1rhah1jq4y1r08i-terramate-0.11.6"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/43adh9xwlhry3c49mpxp5shmvjy2s5j3-terramate-0.11.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/43adh9xwlhry3c49mpxp5shmvjy2s5j3-terramate-0.11.6"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/38klzw7z4nphfczhi5vvmmc9pz06kjgc-terramate-0.11.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/38klzw7z4nphfczhi5vvmmc9pz06kjgc-terramate-0.11.6"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/82z2d4hpgdi3jwpnpxhnzgjp7rnxny9i-terramate-0.11.6",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/82z2d4hpgdi3jwpnpxhnzgjp7rnxny9i-terramate-0.11.6"
+        }
+      }
     }
   }
 }
