@@ -1,22 +1,42 @@
 regions {
-  config = ["uksouth","ukwest"]
+  config = [
+    "uksouth", 
+    "ukwest"
+  ]
   create_region_stacks = false
 }
 
 environments {
-  config = ["development"]
-  create_environment_stacks = true
+  config = [
+    "development", 
+    "prod"
+  ]
+  create_environment_stacks = false
 }
 
 stacks {
-  stack "virtual_networks" {
-    tags = ["connectivity", "test3"]
-    stack "network_security_groups" {
-      tags = ["connectivity", "test1"]
-      description = "Example description for NSGs"
-      stack "test" {
-        tags = ["testtag"]
-      }
+  stack "test_uksouth_dev" {
+    exclude_environments = ["prod"]
+    exclude_regions = ["ukwest"]
+    tags = []
+  
+    stack "nested_stack_uksouth_dev" {
+      tags = []
     }
+
   }
+
+  stack "test_ukwest_prod" {
+    exclude_environments = ["development"]
+    exclude_regions = ["uksouth"]
+    tags = []
+  
+    stack "nested_stack_ukwest_prod" {
+      tags = []
+    }
+
+  }
+  
+
 }
+

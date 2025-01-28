@@ -4,3 +4,7 @@ tasks:
   build:
     cmds:
       - go build -o stacker.bin ./cmd/stacker/main.go
+  install:
+    cmds:
+      - go build -o stacker ./cmd/stacker/main.go
+      - sudo mv ./stacker /usr/local/bin/

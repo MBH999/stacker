@@ -8,8 +8,10 @@ func GenerateRegions(Regions types.Regions, EnvironmentStacks types.DecodedStack
 	for _, environment := range EnvironmentStacks.DecodedStack {
 		for _, region := range Regions.Config {
 			var Stack types.DecodedStack
+			Stack.Name = region
 			Stack.Path = environment.Path + "/" + region
 			Stack.Tags = append(Stack.Tags, region)
+			Stack.ParentPath = environment.Path
 			Stack.Tags = append(Stack.Tags, environment.Tags...)
 			Stack.Description = region
 			Stacks.DecodedStack = append(Stacks.DecodedStack, Stack)
