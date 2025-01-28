@@ -5,9 +5,13 @@ type DecodedStacks struct {
 }
 
 type DecodedStack struct {
-	Name               string
-	Path        string
-	ParentPath   string
-	Tags        []string
-	Description string
+	Name                   string
+	Path                          string
+	ParentPath                   string
+	Tags                          []string
+	Description                   string
+	Region                             string
+	Environment                   string
+	ExcludedEnvironments []string
+	ExcludedRegions           []string
 }
