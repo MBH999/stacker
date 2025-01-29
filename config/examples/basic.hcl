@@ -15,6 +15,7 @@ environments {
 }
 
 stacks {
+
   stack "test_uksouth_dev" {
     exclude_environments = ["prod"]
     exclude_regions = ["ukwest"]

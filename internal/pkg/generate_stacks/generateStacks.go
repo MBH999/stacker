@@ -1,27 +1,40 @@
 package generatestacks
 
 import (
+	"fmt"
+	"slices"
+
 	"github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
 
-func GenerateStacks(Stacks types.Stacks, RegionStacks types.DecodedStacks, EnvironmentStacks types.DecodedStacks) types.DecodedStacks {
+func GenerateStacks(Stacks types.Stacks, Regions types.Regions, Environments types.Environments) types.DecodedStacks {
 	var DecodedStacks types.DecodedStacks
 
-	for _, environment := range EnvironmentStacks.DecodedStack {
-		for _, region := range RegionStacks.DecodedStack {
+	for _, environment := range Environments.Config {
+		for _, region := range Regions.Config {
 			for _, stack := range Stacks.Stack {
-				DecodedStacks = processStack(stack, region, environment, region.Path, DecodedStacks, stack.ExcludeRegions, stack.ExcludeEnvironments)
+				// if slices.Contains(stack.ExcludeRegions, region) {
+				// 	continue
+				// }
+				// if slices.Contains(stack.ExcludeEnvironments, environment) {
+				// 	continue
+				// }
+				if !slices.Contains(stack.ExcludeRegions, region) && !slices.Contains(stack.ExcludeEnvironments, environment) {
+					parentPath := fmt.Sprintf("./stacks/%s/%s", environment, region)
+					DecodedStacks = processStack(stack, region, environment, parentPath, DecodedStacks, stack.ExcludeRegions, stack.ExcludeEnvironments)
+				}
 			}
 		}
 	}
+
 	return DecodedStacks
 }
 
 // Helper function to recursively process a stack and its child stacks.
 func processStack(
 	stack types.Stack,
-	region types.DecodedStack,
-	environment types.DecodedStack,
+	region string,
+	environment string,
 	parentPath string,
 	DecodedStacks types.DecodedStacks,
 	ExcludeRegions []string,
@@ -30,10 +43,10 @@ func processStack(
 		Name:                 stack.Name,
 		Path:                 parentPath + "/" + stack.Name,
 		ParentPath:           parentPath,
-		Tags:                 append(region.Tags, stack.Tags...),
+		Tags:                 stack.Tags,
 		Description:          stack.Name,
-		Region:               region.Name,
-		Environment:          environment.Name,
+		Region:               region,
+		Environment:          environment,
 		ExcludedEnvironments: ExcludeEnvironments,
 		ExcludedRegions:      ExcludeRegions,
 	}

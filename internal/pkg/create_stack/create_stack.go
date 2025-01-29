@@ -2,36 +2,40 @@ package createstack
 
 import (
 	"fmt"
-	"slices"
-
+	"github.com/charmbracelet/log"
 	"github.com/tmtf-stacker/stacker/internal/pkg/types"
+	"os/exec"
+	"strings"
 )
 
-func CreateStack(Stack types.DecodedStack) error {
-	fmt.Println(Stack.ExcludedRegions)
+func CreateStack(stack types.DecodedStack) error {
+	// Join tags into a comma-separated string
+	tags := strings.Join(stack.Tags, ",")
+	log.Debugf("Prepared tags: %s", tags)
 
-	if slices.Contains(Stack.ExcludedRegions, Stack.Region) {
-		fmt.Printf("Not Deploying Stack %s in %s\n", Stack.Name, Stack.Region)
-		return nil
+	// Build the command string
+	command := fmt.Sprintf(
+		`terramate create --tags "%s" --description "%s" %s`,
+		tags, stack.Description, stack.Path,
+	)
+	log.Debugf("Executing command: %s", command)
+
+	// Prepare the command
+	cmd := exec.Command("sh", "-c", command)
+
+	// Run the command and capture its combined output
+	output, err := cmd.CombinedOutput()
+
+	// Log both error and combined output if something goes wrong
+	if err != nil {
+		log.Errorf("Failed to create stack. Error: %v", err)
+		log.Errorf("Command output: %s", string(output))
+		return err
 	}
 
-	if slices.Contains(Stack.ExcludedEnvironments, Stack.Environment) {
-		fmt.Printf("Not Deploying Stack %s in %s\n", Stack.Name, Stack.Environment)
-		return nil
-	}
+	// Log both the success message and the command output
+	log.Infof("Successfully created stack at path '%s'", stack.Path)
+	log.Debugf("Command output: %s", string(output))
 
 	return nil
-	// tags := strings.Join(Stack.Tags, ",")
-	//
-	// command := "terramate create --tags " + tags + " " + "--description \"" + Stack.Description + "\" " + Stack.Path
-	// cmd := exec.Command("sh", "-c", command)
-	//
-	// _, err := cmd.CombinedOutput()
-	// if err != nil {
-	// 	log.Errorf("error: %v", err.Error())
-	// 	return err
-	// }
-	//
-	// log.Infof("Created stack: %v", Stack.Path)
-	// return err
 }

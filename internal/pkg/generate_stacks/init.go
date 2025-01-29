@@ -10,7 +10,7 @@ import (
 func Init(Config types.Config) {
 	EnvironmentStacks := GenerateEnvironments(Config.Environments)
 	RegionStacks := GenerateRegions(Config.Regions, EnvironmentStacks)
-	Stacks := GenerateStacks(Config.Stacks, RegionStacks, EnvironmentStacks)
+	Stacks := GenerateStacks(Config.Stacks, Config.Regions, Config.Environments)
 
 	var StackConfig types.DecodedStacks
 
