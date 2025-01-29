@@ -20,11 +20,25 @@ type Stack struct {
 }
 
 type Regions struct {
-	Config             []string `hcl:"config"`
-	CreateRegionStacks bool     `hcl:"create_region_stacks"`
+	Region []Region `hcl:"region,block"`
+	// Config             []string `hcl:"config"`
+	// CreateRegionStacks bool     `hcl:"create_region_stacks"`
+}
+
+type Region struct {
+	Name          string   `hcl:"name,label"`
+	Tags          []string `hcl:"tags"`
+	DeployAsStack bool     `hcl:"deploy_as_stack"`
 }
 
 type Environments struct {
-	Config                  []string `hcl:"config"`
-	CreateEnvironmentStacks bool     `hcl:"create_environment_stacks"`
+	Environment []Environment `hcl:"environment,block"`
+	// Config                  []string `hcl:"config"`
+	// CreateEnvironmentStacks bool     `hcl:"create_environment_stacks"`
+}
+
+type Environment struct {
+	Name          string   `hcl:"name,label"`
+	Tags          []string `hcl:"tags"`
+	DeployAsStack bool     `hcl:"deploy_as_stack"`
 }

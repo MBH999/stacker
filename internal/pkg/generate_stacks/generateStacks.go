@@ -10,18 +10,18 @@ import (
 func GenerateStacks(Stacks types.Stacks, Regions types.Regions, Environments types.Environments) types.DecodedStacks {
 	var DecodedStacks types.DecodedStacks
 
-	for _, environment := range Environments.Config {
-		for _, region := range Regions.Config {
+	for _, environment := range Environments.Environment {
+		for _, region := range Regions.Region {
 			for _, stack := range Stacks.Stack {
-				// if slices.Contains(stack.ExcludeRegions, region) {
-				// 	continue
-				// }
-				// if slices.Contains(stack.ExcludeEnvironments, environment) {
-				// 	continue
-				// }
-				if !slices.Contains(stack.ExcludeRegions, region) && !slices.Contains(stack.ExcludeEnvironments, environment) {
-					parentPath := fmt.Sprintf("./stacks/%s/%s", environment, region)
-					DecodedStacks = processStack(stack, region, environment, parentPath, DecodedStacks, stack.ExcludeRegions, stack.ExcludeEnvironments)
+				if slices.Contains(stack.ExcludeRegions, region.Name) {
+					continue
+				}
+				if slices.Contains(stack.ExcludeEnvironments, environment.Name) {
+					continue
+				}
+				if !slices.Contains(stack.ExcludeRegions, region.Name) && !slices.Contains(stack.ExcludeEnvironments, environment.Name) {
+					parentPath := fmt.Sprintf("./stacks/%s/%s", environment.Name, region.Name)
+					DecodedStacks = processStack(stack, region.Name, environment.Name, parentPath, DecodedStacks, stack.ExcludeRegions, stack.ExcludeEnvironments)
 				}
 			}
 		}

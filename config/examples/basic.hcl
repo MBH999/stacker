@@ -1,23 +1,33 @@
 regions {
-  config = [
-    "uksouth", 
-    "ukwest"
-  ]
-  create_region_stacks = false
+  region "ukwest" {
+    tags = []
+    deploy_as_stack = false
+  }
+  region "uksouth" {
+    tags = []
+    deploy_as_stack = true
+  }
 }
 
 environments {
-  config = [
-    "development", 
-    "prod"
-  ]
-  create_environment_stacks = false
+  environment "prd" {
+    tags = []
+    deploy_as_stack = true
+  }
+  environment "dev" {
+    tags = []
+    deploy_as_stack = true
+  }
+  environment "tst" {
+    tags = []
+    deploy_as_stack = true
+  }
 }
 
 stacks {
 
   stack "test_uksouth_dev" {
-    exclude_environments = ["prod"]
+    exclude_environments = ["prd"]
     exclude_regions = ["ukwest"]
     tags = []
   
@@ -28,7 +38,7 @@ stacks {
   }
 
   stack "test_ukwest_prod" {
-    exclude_environments = ["development"]
+    exclude_environments = ["dev"]
     exclude_regions = ["uksouth"]
     tags = []
   

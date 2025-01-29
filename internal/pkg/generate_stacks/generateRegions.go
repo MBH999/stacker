@@ -1,20 +1,24 @@
 package generatestacks
 
-import "github.com/tmtf-stacker/stacker/internal/pkg/types"
+import (
+	"fmt"
 
-func GenerateRegions(Regions types.Regions, EnvironmentStacks types.DecodedStacks) types.DecodedStacks {
+	"github.com/tmtf-stacker/stacker/internal/pkg/types"
+)
+
+func GenerateRegions(Regions types.Regions, Environments types.Environments) types.DecodedStacks {
 	var Stacks types.DecodedStacks
 
-	for _, environment := range EnvironmentStacks.DecodedStack {
-		for _, region := range Regions.Config {
+	for _, environment := range Environments.Environment {
+		for _, region := range Regions.Region {
 			Stack := types.DecodedStack{
-				Name:                 region,
-				Path:                 environment.Path + "/" + region,
-				ParentPath:           environment.ParentPath,
-				Tags:                 append(environment.Tags, region),
-				Description:          region,
-				Region:               region,
-				Environment:          environment.Environment,
+				Name:                 region.Name,
+				Path:                 fmt.Sprintf("./stacks/%s/%s/", environment.Name, region.Name),
+				ParentPath:           fmt.Sprintf("./stacks/%s", environment.Name),
+				Tags:                 append(environment.Tags, region.Name),
+				Description:          region.Name,
+				Region:               region.Name,
+				Environment:          environment.Name,
 				ExcludedEnvironments: []string{},
 				ExcludedRegions:      []string{},
 			}
