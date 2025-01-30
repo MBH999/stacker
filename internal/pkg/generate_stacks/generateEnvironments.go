@@ -1,7 +1,7 @@
 package generatestacks
 
 import (
-	"fmt"
+	// "fmt"
 
 	types "github.com/tmtf-stacker/stacker/internal/pkg/types"
 )
@@ -18,10 +18,10 @@ func GenerateEnvironments(Environments types.Environments) types.DecodedStacks {
 			Description:          environment.Name,
 			Region:               "N/A",
 			Environment:          environment.Name,
+			DeployAsStack:        environment.DeployAsStack,
 			ExcludedEnvironments: []string{},
 			ExcludedRegions:      []string{},
 		}
-		fmt.Println(Stack.Name)
 		Stacks.DecodedStack = append(Stacks.DecodedStack, Stack)
 	}
 	return Stacks

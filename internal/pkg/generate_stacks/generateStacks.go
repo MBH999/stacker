@@ -47,6 +47,7 @@ func processStack(
 		Description:          stack.Name,
 		Region:               region,
 		Environment:          environment,
+		DeployAsStack:        true,
 		ExcludedEnvironments: ExcludeEnvironments,
 		ExcludedRegions:      ExcludeRegions,
 	}

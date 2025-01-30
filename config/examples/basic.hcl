@@ -1,14 +1,3 @@
-regions {
-  region "ukwest" {
-    tags = []
-    deploy_as_stack = false
-  }
-  region "uksouth" {
-    tags = []
-    deploy_as_stack = true
-  }
-}
-
 environments {
   environment "prd" {
     tags = []
@@ -16,9 +5,20 @@ environments {
   }
   environment "dev" {
     tags = []
-    deploy_as_stack = true
+    deploy_as_stack = false
   }
   environment "tst" {
+    tags = []
+    deploy_as_stack = false
+  }
+}
+
+regions {
+  region "ukwest" {
+    tags = []
+    deploy_as_stack = false
+  }
+  region "uksouth" {
     tags = []
     deploy_as_stack = true
   }

@@ -19,6 +19,7 @@ func GenerateRegions(Regions types.Regions, Environments types.Environments) typ
 				Description:          region.Name,
 				Region:               region.Name,
 				Environment:          environment.Name,
+				DeployAsStack:        region.DeployAsStack,
 				ExcludedEnvironments: []string{},
 				ExcludedRegions:      []string{},
 			}
