@@ -27,7 +27,7 @@ regions {
 stacks {
 
   stack "test_uksouth_dev" {
-    exclude_environments = ["prd"]
+    exclude_environments = ["prd", "tst"]
     exclude_regions = ["ukwest"]
     tags = []
   
