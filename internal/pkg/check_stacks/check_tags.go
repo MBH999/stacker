@@ -18,7 +18,8 @@ func CheckTags(Stack types.DecodedStack) {
 	tagsStr := string(tags)
 
 	// create terramate command to grab stack tags
-	command := "terramate experimental get-config-value -C " + Stack.Path + " 'terramate.stack.tags'"
+	command := fmt.Sprintf("terramate experimental get-config-value -C %s 'terramate.stack.tags'", Stack.Path)
+	// command := "terramate experimental get-config-value -C " + Stack.Path + " 'terramate.stack.tags'"
 	cmd := exec.Command("sh", "-c", command)
 
 	// run the command

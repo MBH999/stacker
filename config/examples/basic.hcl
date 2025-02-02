@@ -1,6 +1,6 @@
 environments {
   environment "prd" {
-    tags = []
+    tags = ["production"]
     deploy_as_stack = true
   }
   environment "dev" {
@@ -27,12 +27,12 @@ regions {
 stacks {
 
   stack "test_uksouth_dev" {
-    exclude_environments = ["prd", "tst"]
+    exclude_environments = ["prd"]
     exclude_regions = ["ukwest"]
     tags = []
   
     stack "nested_stack_uksouth_dev" {
-      tags = []
+      tags = ["test"]
     }
 
   }

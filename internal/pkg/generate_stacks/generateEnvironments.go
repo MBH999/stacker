@@ -14,7 +14,7 @@ func GenerateEnvironments(Environments types.Environments) types.DecodedStacks {
 			Name:                 environment.Name,
 			Path:                 "./stacks/" + environment.Name,
 			ParentPath:           "./stacks/",
-			Tags:                 []string{environment.Name},
+			Tags:                 append(environment.Tags, environment.Name),
 			Description:          environment.Name,
 			Region:               "N/A",
 			Environment:          environment.Name,

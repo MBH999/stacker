@@ -11,11 +11,13 @@ func GenerateRegions(Regions types.Regions, Environments types.Environments) typ
 
 	for _, environment := range Environments.Environment {
 		for _, region := range Regions.Region {
+			regionTags := append(region.Tags, region.Name)
+
 			Stack := types.DecodedStack{
 				Name:                 region.Name,
 				Path:                 fmt.Sprintf("./stacks/%s/%s/", environment.Name, region.Name),
 				ParentPath:           fmt.Sprintf("./stacks/%s", environment.Name),
-				Tags:                 append(environment.Tags, region.Name),
+				Tags:                 append(environment.Tags, regionTags...),
 				Description:          region.Name,
 				Region:               region.Name,
 				Environment:          environment.Name,
