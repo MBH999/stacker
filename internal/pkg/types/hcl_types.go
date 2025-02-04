@@ -2,7 +2,7 @@ package types
 
 type Config struct {
 	Regions      Regions      `hcl:"regions,block"`
-	Environments Environments `hcl:"environments,block"`
+	// Environments Environments `hcl:"environments,block"`
 	Stacks       Stacks       `hcl:"stacks,block"`
 }
 
@@ -31,14 +31,14 @@ type Region struct {
 	DeployAsStack bool     `hcl:"deploy_as_stack"`
 }
 
-type Environments struct {
-	Environment []Environment `hcl:"environment,block"`
-	// Config                  []string `hcl:"config"`
-	// CreateEnvironmentStacks bool     `hcl:"create_environment_stacks"`
-}
-
-type Environment struct {
-	Name          string   `hcl:"name,label"`
-	Tags          []string `hcl:"tags"`
-	DeployAsStack bool     `hcl:"deploy_as_stack"`
-}
+// type Environments struct {
+// 	Environment []Environment `hcl:"environment,block"`
+// 	// Config                  []string `hcl:"config"`
+// 	// CreateEnvironmentStacks bool     `hcl:"create_environment_stacks"`
+// }
+//
+// type Environment struct {
+// 	Name          string   `hcl:"name,label"`
+// 	Tags          []string `hcl:"tags"`
+// 	DeployAsStack bool     `hcl:"deploy_as_stack"`
+// }

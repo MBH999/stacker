@@ -11,17 +11,17 @@ import (
 )
 
 func Init(Config types.Config) {
-	EnvironmentStacks := GenerateEnvironments(Config.Environments)
-	RegionStacks := GenerateRegions(Config.Regions, Config.Environments)
-	Stacks := GenerateStacks(Config.Stacks, Config.Regions, Config.Environments)
+	// EnvironmentStacks := GenerateEnvironments(Config.Environments)
+	RegionStacks := GenerateRegions(Config.Regions)
+	Stacks := GenerateStacks(Config.Stacks, Config.Regions)
 
 	var StackConfig []types.DecodedStack
 
-	for _, env := range EnvironmentStacks.DecodedStack {
-		if env.DeployAsStack {
-			StackConfig = append(StackConfig, env)
-		}
-	}
+	// for _, env := range EnvironmentStacks.DecodedStack {
+	// 	if env.DeployAsStack {
+	// 		StackConfig = append(StackConfig, env)
+	// 	}
+	// }
 
 	for _, region := range RegionStacks.DecodedStack {
 		if region.DeployAsStack {
