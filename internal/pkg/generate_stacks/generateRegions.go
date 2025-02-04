@@ -20,7 +20,6 @@ func GenerateRegions(Regions types.Regions) types.DecodedStacks {
 				Description:          region.Name,
 				Region:               region.Name,
 				DeployAsStack:        region.DeployAsStack,
-				ExcludedEnvironments: []string{},
 				ExcludedRegions:      []string{},
 			}
 			Stacks.DecodedStack = append(Stacks.DecodedStack, Stack)

@@ -17,7 +17,7 @@ func GenerateStacks(Stacks types.Stacks, Regions types.Regions) types.DecodedSta
 				}
 				if !slices.Contains(stack.ExcludeRegions, region.Name) {
 					parentPath := fmt.Sprintf("./stacks/%s", region.Name)
-					DecodedStacks = processStack(stack, region, parentPath, DecodedStacks, stack.ExcludeRegions, stack.ExcludeEnvironments)
+					DecodedStacks = processStack(stack, region, parentPath, DecodedStacks, stack.ExcludeRegions)
 				}
 			}
 		}
@@ -25,14 +25,12 @@ func GenerateStacks(Stacks types.Stacks, Regions types.Regions) types.DecodedSta
 	return DecodedStacks
 }
 
-// Helper function to recursively process a stack and its child stacks.
 func processStack(
 	stack types.Stack,
 	region types.Region,
 	parentPath string,
 	DecodedStacks types.DecodedStacks,
-	ExcludeRegions []string,
-	ExcludeEnvironments []string) types.DecodedStacks {
+	ExcludeRegions []string) types.DecodedStacks {
 
 	tags := append(region.Tags, region.Name)
 
@@ -44,7 +42,6 @@ func processStack(
 		Description:          stack.Name,
 		Region:               region.Name,
 		DeployAsStack:        true,
-		ExcludedEnvironments: ExcludeEnvironments,
 		ExcludedRegions:      ExcludeRegions,
 	}
 
@@ -59,7 +56,7 @@ func processStack(
 
 	if stack.ChildStack != nil {
 		for _, childStack := range stack.ChildStack {
-			DecodedStacks = processStack(childStack, region, Stack.Path, DecodedStacks, ExcludeRegions, ExcludeEnvironments)
+			DecodedStacks = processStack(childStack, region, Stack.Path, DecodedStacks, ExcludeRegions)
 		}
 	}
 

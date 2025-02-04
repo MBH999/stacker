@@ -11,8 +11,6 @@ type DecodedStack struct {
 	Tags                 []string
 	Description          string
 	Region               string
-	Environment          string
 	DeployAsStack        bool
-	ExcludedEnvironments []string
 	ExcludedRegions      []string
 }

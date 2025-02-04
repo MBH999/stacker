@@ -1,18 +1,3 @@
-#environments {
-#  environment "connectivity" {
-#    tags = []
-#    deploy_as_stack = false
-#  }
-#  environment "identity" {
-#    tags = []
-#    deploy_as_stack = false
-#  }
-#  environment "management" {
-#    tags = []
-#    deploy_as_stack = false
-#  }
-#}
-
 regions {
   region "uks" {
     tags = []
@@ -128,12 +113,10 @@ stacks {
 
     stack "build_agent" {
       tags = []
-      exclude_environments = ["identity", "connectivity"]
     }
 
     stack "vm_access_kv" {
       tags = []
-      exclude_environments = ["identity", "connectivity"]
     }
   }
 }
