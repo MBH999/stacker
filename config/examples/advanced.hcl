@@ -1,17 +1,13 @@
 regions {
   region "uks" {
-    tags = []
-    deploy_as_stack = true
-  }
-  region "ukw" {
-    tags = []
+    tags = ["test"]
     deploy_as_stack = true
   }
 }
 
 stacks {
   stack "connectivity" {
-    tags = []
+    tags = ["test"]
     stack "virtual_wan" {
       tags = []
     }
@@ -106,7 +102,6 @@ stacks {
 
   stack "management" {
     tags = []
-    exclude_regions = ["ukw"]
     stack "virtual_networks" {
       tags = []
     }

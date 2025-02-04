@@ -1,6 +1,22 @@
 stack {
-  name        = "{{ .Name }}"
-  description = "{{ .Description }}"
-  tags        = {{ .Tags }}
-  id          = "{{ .ID }}"
+  name        = "{{ .Stack.Name }}"
+  description = "{{ .Stack.Description }}"
+  tags        = {{ toHCLList .Stack.Tags }}
+  id          = "{{ .Stack.ID }}"
+  {{- if gt (len .Stack.Before) 0 }}
+  before      = {{ toHCLList .Stack.Before }}
+  {{- end }}
+  {{- if gt (len .Stack.After) 0 }}
+  after       = {{ toHCLList .Stack.After }}
+  {{- end }}
+  {{- if gt (len .Stack.Wants) 0 }}
+  wants       = {{ toHCLList .Stack.Wants }}
+  {{- end }}
+  {{- if gt (len .Stack.WantedBy) 0 }}
+  wanted_by   = {{ toHCLList .Stack.WantedBy }}
+  {{- end }}
+  {{- if gt (len .Stack.Watch) 0 }}
+  watch       = {{ toHCLList .Stack.Watch }}
+  {{- end }}
 }
+
