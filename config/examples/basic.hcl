@@ -12,7 +12,8 @@ regions {
 stacks {
 
   stack "StackA" {
-    tags = ["testB"]
+    tags = ["testa"]
+    description = "test description"
     stack "StackB" {
       tags = []
     }
