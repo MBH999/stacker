@@ -2,6 +2,8 @@
 
 Stacker is a CLI tool written in Go to manage terramate stacks.
 
+It uses the Hashicorp Configuration Language (HCL) to create and manage stacks.
+
 ## Install
 
 To install stacker, clone this repository. You will need to ensure you have DevBox by Jetify installed on your local system.
@@ -25,5 +27,7 @@ To build locally, follow steps 1 & 2 above, then run ```task build```. This will
 [Creating Stacks](./docs/stacks.md)
 
 [Running Stacker](./docs/cli.md)
+
+[Management](./docs/stacks_management.md)
 
 [Examples](./config/examples/)
