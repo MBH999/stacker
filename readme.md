@@ -30,4 +30,4 @@ To build locally, follow steps 1 & 2 above, then run ```task build```. This will
 
 [Management](./docs/stacks_management.md)
 
-[Examples](./config/examples/)
+[Examples](./config/examples/example_configuration.hcl)
