@@ -1,33 +1,26 @@
 regions {
-  config = ["uksouth"]
-  create_region_stacks = false
-}
-
-environments {
-  config = ["production"]
-  create_environment_stacks = false
+  region "uksouth" {
+    tags = []
+    deploy_as_stack = true
+  }
+  region "ukwest" {
+    tags = []
+    deploy_as_stack = false
+  }
 }
 
 stacks {
-  stack "1_networking" {
-    tags = ["core"]
-  }
-  stack "2_management" {
-    tags = ["core", "virtualisation"]
-  }
-  stack "3_kubernetes" {
-    tags = ["containers"]
-    stack "masters" {
-      tags = ["kubernetes"]
-      stack "nodes" {
-        tags = ["kubernetes"]
-      }
-    }
-  }
-  stack "4_management" {
-    tags = ["management"]
-    stack "monitoring" {
+  stack "stackA" {
+    tags = []
+      
+    stack "childStackA" {
       tags = []
+      description = "example description"
     }
   }
-}
+
+  stack "stackB" {
+    tags = []
+    exclude_regions = ["uksouth"]
+  }
+}   
