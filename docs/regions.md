@@ -1,12 +1,12 @@
 # Regions
 
-Regions are the "top" level of the stacks that are created.
+Regions represent the highest level of the Terramate stack hierarchy. They allow you to build multi-region environments effortlessly using Terramate’s code generation and stack filtering features.
 
-This allows users to build multi region environmentments with ease using terramates code generation and stack filtering.
+## Defining Regions
 
-The regions block is defined as
+Regions are defined in your configuration as follows:
 
-```
+```hcl
 regions {
     region "uksouth" {
         tags = []
@@ -21,13 +21,18 @@ regions {
 
 ## Parameters
 
-- name: The name of the block, e.g. "uksouth" defines the name of the stack.
-- tags: The tags parameter is a list of strings. This will apply tags to the stack in question. These tags will filter down to each child stack in the tree. The region name is also added as a tag.
-- deploy_as_stack: This is a flag to determine if this region level should be deployed as a terramate stack. If false, the folder will not be deployed until there is a child stack defined for that region.
+    name:
+    The unique identifier for the region. In this example, "uksouth" and "ukwest" serve as the names for their respective stacks.
 
-## Folder structure
+    tags:
+    A list of strings used to tag the region. These tags are applied to the region's stack and propagate down to each child stack. Additionally, the region name is automatically added as a tag.
 
-The above example will deploy the following as stacks (assuming there is one [Stack](./stacks.md) configured.
+    deploy_as_stack:
+    A Boolean flag indicating whether the region should be deployed as an independent Terramate stack. If set to false, the region’s folder will not be deployed unless it contains at least one child stack.
+
+## Folder Structure
+
+Given the above configuration—and assuming you have at least one Stack configured—Terramate will deploy the stacks with the following folder structure:
 
 ```
 ./stacks/uksouth/stack.tm.hcl
@@ -35,3 +40,9 @@ The above example will deploy the following as stacks (assuming there is one [St
 
 ./stacks/ukwest/exampleStack/stack.tm.hcl
 ```
+
+    uksouth:
+    Because deploy_as_stack is true, the uksouth region is deployed as its own stack, along with any child stacks (e.g., exampleStack).
+
+    ukwest:
+    With deploy_as_stack set to false, only the child stacks within ukwest (e.g., exampleStack) are deployed.
