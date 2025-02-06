@@ -21,11 +21,11 @@ regions {
 
 ## Parameters
 
-- name: The unique identifier for the region. In this example, "uksouth" and "ukwest" serve as the names for their respective stacks.
+- name (***required***): The unique identifier for the region. In this example, "uksouth" and "ukwest" serve as the names for their respective stacks.
 
-- tags: A list of strings used to tag the region. These tags are applied to the region's stack and propagate down to each child stack. Additionally, the region name is automatically added as a tag.
+- tags (***required***): A list of strings used to tag the region. These tags are applied to the region's stack and propagate down to each child stack. Additionally, the region name is automatically added as a tag.
 
-- deploy_as_stack: A Boolean flag indicating whether the region should be deployed as an independent Terramate stack. If set to false, the region’s folder will not be deployed unless it contains at least one child stack.
+- deploy_as_stack (***required***): A Boolean flag indicating whether the region should be deployed as an independent Terramate stack. If set to false, the region’s folder will not be deployed unless it contains at least one child stack.
 
 ## Folder Structure
 
