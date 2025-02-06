@@ -21,14 +21,11 @@ regions {
 
 ## Parameters
 
-    name:
-    The unique identifier for the region. In this example, "uksouth" and "ukwest" serve as the names for their respective stacks.
+- name: The unique identifier for the region. In this example, "uksouth" and "ukwest" serve as the names for their respective stacks.
 
-    tags:
-    A list of strings used to tag the region. These tags are applied to the region's stack and propagate down to each child stack. Additionally, the region name is automatically added as a tag.
+- tags: A list of strings used to tag the region. These tags are applied to the region's stack and propagate down to each child stack. Additionally, the region name is automatically added as a tag.
 
-    deploy_as_stack:
-    A Boolean flag indicating whether the region should be deployed as an independent Terramate stack. If set to false, the region’s folder will not be deployed unless it contains at least one child stack.
+- deploy_as_stack: A Boolean flag indicating whether the region should be deployed as an independent Terramate stack. If set to false, the region’s folder will not be deployed unless it contains at least one child stack.
 
 ## Folder Structure
 
@@ -41,8 +38,6 @@ Given the above configuration—and assuming you have at least one Stack configu
 ./stacks/ukwest/exampleStack/stack.tm.hcl
 ```
 
-    uksouth:
-    Because deploy_as_stack is true, the uksouth region is deployed as its own stack, along with any child stacks (e.g., exampleStack).
+- uksouth: Because deploy_as_stack is true, the uksouth region is deployed as its own stack, along with any child stacks (e.g., exampleStack).
 
-    ukwest:
-    With deploy_as_stack set to false, only the child stacks within ukwest (e.g., exampleStack) are deployed.
+- ukwest: With deploy_as_stack set to false, only the child stacks within ukwest (e.g., exampleStack) are deployed.
