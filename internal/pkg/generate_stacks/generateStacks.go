@@ -11,18 +11,24 @@ func GenerateStacks(Stacks types.Stacks, Regions types.Regions) types.DecodedSta
 	var DecodedStacks types.DecodedStacks
 
 	for _, region := range Regions.Region {
+
 		for _, stack := range Stacks.Stack {
+
 			if slices.Contains(stack.ExcludeRegions, region.Name) {
 				continue
 			}
+
 			if !slices.Contains(stack.ExcludeRegions, region.Name) {
 				parentPath := fmt.Sprintf("./stacks/%s", region.Name)
-				DecodedStacks = processStack(stack, region, parentPath, DecodedStacks, stack.ExcludeRegions)
+				DecodedStacks = processStack(stack, region, parentPath, DecodedStacks, stack.ExcludeRegions, region.Tags)
 			}
+
 		}
+
 	}
 
 	return DecodedStacks
+
 }
 
 func processStack(
@@ -30,9 +36,15 @@ func processStack(
 	region types.Region,
 	parentPath string,
 	DecodedStacks types.DecodedStacks,
-	ExcludeRegions []string) types.DecodedStacks {
+	ExcludeRegions []string,
+	ParentTags []string) types.DecodedStacks {
 
 	tags := append(region.Tags, region.Name)
+	tags = append(tags, stack.Tags...)
+	tags = append(tags, ParentTags...)
+	tags = append(tags, stack.Name)
+
+	tags = removeDuplicates(tags)
 
 	var stackDescription string
 	if stack.Description != "" {
@@ -45,7 +57,7 @@ func processStack(
 		Name:            stack.Name,
 		Path:            parentPath + "/" + stack.Name,
 		ParentPath:      parentPath,
-		Tags:            append(tags, stack.Tags...),
+		Tags:            tags,
 		Description:     stackDescription,
 		Region:          region.Name,
 		DeployAsStack:   true,
@@ -56,9 +68,21 @@ func processStack(
 
 	if stack.ChildStack != nil {
 		for _, childStack := range stack.ChildStack {
-			DecodedStacks = processStack(childStack, region, Stack.Path, DecodedStacks, ExcludeRegions)
+			DecodedStacks = processStack(childStack, region, Stack.Path, DecodedStacks, ExcludeRegions, tags)
 		}
 	}
 
 	return DecodedStacks
+}
+
+func removeDuplicates(tags []string) []string {
+	seen := make(map[string]struct{})
+	var unique []string
+	for _, tag := range tags {
+		if _, ok := seen[tag]; !ok {
+			seen[tag] = struct{}{}
+			unique = append(unique, tag)
+		}
+	}
+	return unique
 }
