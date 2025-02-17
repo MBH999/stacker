@@ -39,6 +39,10 @@ func processStack(
 	ExcludeRegions []string,
 	ParentTags []string) types.DecodedStacks {
 
+	if slices.Contains(stack.ExcludeRegions, region.Name) {
+		return DecodedStacks
+	}
+
 	tags := append(region.Tags, region.Name)
 	tags = append(tags, stack.Tags...)
 	tags = append(tags, ParentTags...)
